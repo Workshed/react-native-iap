@@ -4,7 +4,6 @@
   "description": "React Native In App Purchase Module.",
   "main": "index.js",
   "types": "index.d.ts",
-  "postinstall": "dooboolab-welcome postinstall",
   "scripts": {
     "test": "eslint .",
     "lint": "eslint -c .eslintrc.js '.'"
@@ -26,8 +25,7 @@
     "react-native": ">=0.54"
   },
   "dependencies": {
-    "react-native-build-config": "github:ismaeldcom/react-native-build-config",
-    "dooboolab-welcome": "^1.1.0"
+    "react-native-device-info": "2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
