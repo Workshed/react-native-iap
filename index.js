@@ -447,7 +447,9 @@ export const notifyFulfillmentAmazon = async(receiptId, fulfillmentResult) => {
 
 // Function used to differentiate amazon / android devices
 export const checkIsAmazonDevice = () => {
-  return BuildConfig.FLAVOR === 'amazon';
+  // TESTING local dependency
+  debugger
+  return false;// BuildConfig.FLAVOR === 'amazon';
 }
 
 export const getUserData = async() => {
