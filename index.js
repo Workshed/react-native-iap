@@ -24,10 +24,10 @@ export const prepare = () => {
     android: async() => {
       checkNativeAndroidAvailable();
       let isAmazonDevice = checkIsAmazonDevice();
-      if(isAmazonDevice) {
+      if (isAmazonDevice) {
         Promise.resolve();
       } else {
-        return RNIapAndroidModule.initConnection() 
+        return RNIapAndroidModule.initConnection();
       }
     },
   })();
@@ -35,7 +35,7 @@ export const prepare = () => {
 
 async function checkNativeAndroidAvailable() {
   let isAmazonDevice = checkIsAmazonDevice();
-  if(isAmazonDevice) {
+  if (isAmazonDevice) {
     if (!RNIapAmazonModule) {
       return Promise.reject(new Error('E_IAP_NOT_AVAILABLE', 'The payment setup is not available in this version of the app. Contact admin.'));
     }
@@ -64,13 +64,13 @@ export const initConnection = () => Platform.select({
   },
   android: async() => {
     let isAmazonDevice = checkIsAmazonDevice();
-    if(isAmazonDevice) {
+    if (isAmazonDevice) {
       Promise.resolve();
     } else {
       if (!RNIapAndroidModule) {
         return Promise.resolve();
       }
-      return RNIapAndroidModule.initConnection() 
+      return RNIapAndroidModule.initConnection(); 
     }
   },
 })();
@@ -514,5 +514,6 @@ export default {
   validateReceiptIos,
   validateReceiptAndroid,
   addAdditionalSuccessPurchaseListenerIOS,
-  notifyFulfillmentAmazon
+  notifyFulfillmentAmazon,
+  checkIsAmazonDevice,
 };
