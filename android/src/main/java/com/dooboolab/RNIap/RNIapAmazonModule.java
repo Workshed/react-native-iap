@@ -266,15 +266,16 @@ public class RNIapAmazonModule extends ReactContextBaseJavaModule {
 			List<Receipt> receipts = purchaseUpdatesResponse.getReceipts();
 			UserData userData = purchaseUpdatesResponse.getUserData();
             for(Receipt receipt : receipts) {
-              Date date = receipt.getPurchaseDate();
-              Long transactionDate = date.getTime();
-              WritableMap map = getPurchaseData(receipt.getSku(),
-					  receipt.getReceiptId(),
-					  userData.getUserId(),
-                      transactionDate.doubleValue());
+              if (!receipt.isCanceled()) {
+                Date date = receipt.getPurchaseDate();
+                Long transactionDate = date.getTime();
+                WritableMap map = getPurchaseData(receipt.getSku(),
+                        receipt.getReceiptId(),
+                        userData.getUserId(),
+                        transactionDate.doubleValue());
 
-              //Log.d(TAG, "Adding item: " + map.toString());
-              maps.pushMap(map);
+                maps.pushMap(map);
+              }
             }
             resolvePromises(GET_PURCHASE_UPDATES, maps);
           } catch (Exception e) {
