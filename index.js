@@ -1,5 +1,5 @@
 import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+const BuildConfig = require('react-native-build-config');
 
 const { RNIapIos, RNIapCombinedModule, RNIapAndroidModule, RNIapAmazonModule } = NativeModules;
 
@@ -447,10 +447,7 @@ export const notifyFulfillmentAmazon = async(receiptId, fulfillmentResult) => {
 
 // Function used to differentiate amazon / android devices
 export const checkIsAmazonDevice = () => {
-  // TESTING local dependency
-  
-  console.log('IAP packages says: ', DeviceInfo.getManufacturer().toLowerCase())
-  return DeviceInfo.getManufacturer().toLowerCase() === 'amazon';//false;// BuildConfig.FLAVOR === 'amazon';
+  return BuildConfig.default.IS_AMAZON;
 }
 
 export const getUserData = async() => {
