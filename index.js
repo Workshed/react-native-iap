@@ -1,4 +1,4 @@
-import { NativeModules, Platform, NativeEventEmitter, Platform } from 'react-native';
+import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
 const BuildConfig = require('react-native-build-config');
 
 const { RNIapIos, RNIapCombinedModule, RNIapAndroidModule, RNIapAmazonModule } = NativeModules;
