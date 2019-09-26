@@ -1,5 +1,5 @@
 import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
-import BuildConfig from 'react-native-build-config';
+const BuildConfig = require('react-native-build-config');
 
 const { RNIapIos, RNIapCombinedModule, RNIapAndroidModule, RNIapAmazonModule } = NativeModules;
 
@@ -24,10 +24,10 @@ export const prepare = () => {
     android: async() => {
       checkNativeAndroidAvailable();
       let isAmazonDevice = checkIsAmazonDevice();
-      if(isAmazonDevice) {
+      if (isAmazonDevice) {
         Promise.resolve();
       } else {
-        return RNIapAndroidModule.initConnection() 
+        return RNIapAndroidModule.initConnection();
       }
     },
   })();
@@ -35,7 +35,7 @@ export const prepare = () => {
 
 async function checkNativeAndroidAvailable() {
   let isAmazonDevice = checkIsAmazonDevice();
-  if(isAmazonDevice) {
+  if (isAmazonDevice) {
     if (!RNIapAmazonModule) {
       return Promise.reject(new Error('E_IAP_NOT_AVAILABLE', 'The payment setup is not available in this version of the app. Contact admin.'));
     }
@@ -64,13 +64,13 @@ export const initConnection = () => Platform.select({
   },
   android: async() => {
     let isAmazonDevice = checkIsAmazonDevice();
-    if(isAmazonDevice) {
+    if (isAmazonDevice) {
       Promise.resolve();
     } else {
       if (!RNIapAndroidModule) {
         return Promise.resolve();
       }
-      return RNIapAndroidModule.initConnection() 
+      return RNIapAndroidModule.initConnection(); 
     }
   },
 })();
@@ -447,15 +447,18 @@ export const notifyFulfillmentAmazon = async(receiptId, fulfillmentResult) => {
 
 // Function used to differentiate amazon / android devices
 export const checkIsAmazonDevice = () => {
-  return BuildConfig.FLAVOR === 'amazon';
-}
+  if (Platform.OS === 'ios') {
+    return false;
+  }
+  return BuildConfig.default.IS_AMAZON;
+};
 
 export const getUserData = async() => {
   console.log('hit getUserData');
   let userInfo = JSON.parse(await RNIapAmazonModule.getUserData());
   console.log('user data returning from index.js of IAP module');
   return userInfo;
-}
+};
 
 /**
  * deprecated codes
@@ -511,5 +514,6 @@ export default {
   validateReceiptIos,
   validateReceiptAndroid,
   addAdditionalSuccessPurchaseListenerIOS,
-  notifyFulfillmentAmazon
+  notifyFulfillmentAmazon,
+  checkIsAmazonDevice,
 };

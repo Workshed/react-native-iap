@@ -1,17 +1,16 @@
 {
   "name": "react-native-iap",
-  "version": "2.4.4",
+  "version": "2.4.6",
   "description": "React Native In App Purchase Module.",
   "main": "index.js",
   "types": "index.d.ts",
-  "postinstall": "dooboolab-welcome postinstall",
   "scripts": {
     "test": "eslint .",
     "lint": "eslint -c .eslintrc.js '.'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dooboolab/react-native-iap"
+    "url": "git+https://github.com/Workshed/react-native-iap#amazon"
   },
   "keywords": [
     "react-native",
@@ -26,8 +25,7 @@
     "react-native": ">=0.54"
   },
   "dependencies": {
-    "react-native-build-config": "github:ismaeldcom/react-native-build-config",
-    "dooboolab-welcome": "^1.1.0"
+    "react-native-build-config": "0.3.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
